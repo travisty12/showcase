@@ -1,8 +1,8 @@
 # Portfolio
 
-### Travis Scott
-
 #### A MERN stack app to showcase previous projects, provide an area for users to create custom profile pages with their own handwritten HTML, and the creation / teaching of an image-recognition neural net and chatbot neural net.
+
+### Travis Scott
 
 ## Basic Diagram
 
