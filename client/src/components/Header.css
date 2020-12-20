@@ -1,0 +1,10 @@
+.Header div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+.Header {
+  border-bottom: 1px solid black
+}
