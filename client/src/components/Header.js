@@ -9,7 +9,7 @@ function Header() {
     <div className="Header">
       <div className = "HeaderTop">
         <HeaderAccountInfo />
-        <h2><Link to="/">Home</Link></h2>
+        <h2><Link to="/">This is a Site.</Link></h2>
         <UserSearch />
       </div>
       <div className = "HeaderBottom">

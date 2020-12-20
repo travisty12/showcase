@@ -1,0 +1,35 @@
+.Chat {
+  position: absolute;
+  bottom: 0;
+  left: 2vw;
+  width: 20vw;
+  height: 24vh;
+  border: 1px solid black;
+  box-shadow: 1px 1px 5px 0px;
+}
+
+.ChatHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  height: 10%;
+}
+
+.ChatBody {
+  height: 80%;
+  background-color: rgba(240,240,240,0.95);
+  border: 1px solid black;
+}
+
+.NewChatBox {
+  height: 10%;
+  width: 100%;
+}
+.NewChatBox input {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 1px solid black;
+}

@@ -1,6 +1,9 @@
 function UserSearch() {
   return (
-    <p>User Search Component</p>
+    <div>
+      <input placeholder="Search users..." />
+      <button type="submit">Go</button>
+    </div>
   );
 }
 

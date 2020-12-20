@@ -1,13 +1,14 @@
-import React from "react"
+import React from "react";
+import { Link } from "react-router-dom";
 
 function LinkList() {
   return (
     <React.Fragment>
-      <p>Portfolio</p>
+      <Link to="/portfolio">Portfolio</Link>
       <p>Image Recognition</p>
-      <p>Chat Bot</p>
+      <Link to="/chatbot">Chat Bot</Link>
       <p>User Profiles</p>
-      <p>Home</p>
+      <Link to="/">Home</Link>
     </React.Fragment>
   );
 }
