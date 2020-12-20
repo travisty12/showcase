@@ -4,6 +4,18 @@
 
 ### Travis Scott
 
+## Setup / Installation 
+
+* Clone this repo down through the CLI with `git clone [URL to this repo]`
+
+* Navigate into the server scope with `cd portfolio`, and install necessary modules with `npm i`
+
+* Navigate into the client scope with `cd client`, and install necessary modules with `yarn`
+
+* Navigate back up into the server scope with `cd ..`, and start the application with `npm run dev` to start both server and client
+
+* Go to `localhost:3000` to see the client side application.
+
 ## Basic Diagram
 
 ![Component Diagram](./diagram.png)
