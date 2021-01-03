@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Redirect } from "react-router-dom";
 
 function SignIn() {
   let username = React.createRef();
@@ -6,16 +7,16 @@ function SignIn() {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    console.log("fetching user");
     let user = await true; // will be fetch to server
     if (!user) {
-      setErrors("Username or password invalid.");
+      setMessage("Error: Username or password invalid.");
     } else {
-      setErrors("");
+      setMessage("Successfully logged in! Routing home...");
+      setTimeout(() => setMessage(<Redirect to="/" />), 1500);
     }
   }
 
-  const [errors, setErrors] = useState("");
+  const [message, setMessage] = useState("");
 
   return (
     <div className="SignIn">
@@ -26,7 +27,7 @@ function SignIn() {
         <input ref={password} type="password" name="password" />
         <button type="submit">Submit</button>
       </form>
-      {errors ? <p>Errors: {errors}</p> : <React.Fragment></React.Fragment>}
+      {message ? <p>{message}</p> : <React.Fragment></React.Fragment>}
     </div>
   );
 }
