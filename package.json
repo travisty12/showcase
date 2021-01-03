@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A MERN stack app to showcase previous projects, provide an area for users to create custom profile pages with their own handwritten HTML, and the creation / teaching of an image-recognition neural net and chatbot neural net.",
   "main": "index.js",
+  "module": "server.js",
   "scripts": {
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
@@ -13,8 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "crypto-js": "^4.0.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "joi": "^17.3.0",
     "mongoose": "^5.11.8",
     "react-router-dom": "^5.1.2"
   },
