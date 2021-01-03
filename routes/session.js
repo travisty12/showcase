@@ -44,4 +44,8 @@ sessionRouter.delete("", ({session}, res) => {
   }
 });
 
+sessionRouter.get("", ({ session: { user }}, res) => {
+  res.send({ user });
+});
+
 export default sessionRouter;
