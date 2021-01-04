@@ -1,13 +1,17 @@
 import React, {useState} from "react";
 import { Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
+import { login } from '../actions/session';
 
-function SignIn() {
-  let username = React.createRef();
-  let password = React.createRef();
+const SignIn = ({errors,login}) => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    let user = await true; // will be fetch to server
+    const user = {
+      email: e.target[0].value,
+      password: e.target[1].value
+    }
+    let response = await login(user);
     if (!user) {
       setMessage("Error: Username or password invalid.");
     } else {
@@ -21,15 +25,21 @@ function SignIn() {
   return (
     <div className="SignIn">
       <form onSubmit={handleSignIn}>
-        <label htmlFor="username">Username</label>
-        <input ref={username} name="username" />
+        <label htmlFor="email">Email</label>
+        <input name="email" required="required"/>
         <label htmlFor="password">Password</label>
-        <input ref={password} type="password" name="password" />
+        <input type="password" name="password" required="required" />
         <button type="submit">Submit</button>
       </form>
+      {errors}
       {message ? <p>{message}</p> : <React.Fragment></React.Fragment>}
     </div>
   );
 }
 
-export default SignIn;
+const mapStateToProps = ({errors}) => ({errors});
+const mapDispatchToProps = dispatch => ({
+  login: user => dispatch(login(user));
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(SignIn);

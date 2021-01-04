@@ -1,19 +1,22 @@
 import React, {useState} from "react";
+import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 
-function SignUp() {
-  let username = React.createRef();
-  let password = React.createRef();
-  let passwordConfirm = React.createRef();
+const SignUp = ({errors, signup}) => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    console.log(username.current.value);
-    if (password.current.value !== passwordConfirm.current.value) {
+    if (e.target[2].value !== e.target[3].value) {
       setMessage("Error: Password must match the confirmation.");
     } else {
       setMessage("Creating account!");
-      let user = await true; // will call server
+
+      const user = {
+        username: e.target[0].value,
+        email: e.target[1].value,
+        password: e.target[2].value
+      };
+      let response = await signup(user);
       if (!user) {
         setMessage("Error: Could not create account. Username taken.");
       } else {
@@ -29,16 +32,24 @@ function SignUp() {
     <div className="SignUp">
       <form onSubmit={handleSignUp}>
         <label htmlFor="username">Username</label>
-        <input ref={username} name="username" required="required" />
+        <input name="username" required="required" />
+        <label htmlFor="email">Email address</label>
+        <input name="email" required="required" />
         <label htmlFor="password">Password</label>
-        <input ref={password} type="password" name="password" required="required" />
+        <input type="password" name="password" required="required" />
         <label htmlFor="passwordConfirm">Confirm Password</label>
-        <input ref={passwordConfirm} type="password" name="passwordConfirm" required="required" />
+        <input type="password" name="passwordConfirm" required="required" />
         <button type="submit">Submit</button>
       </form>
+      {errors}
       {message ? <p>{message}</p> : <React.Fragment></React.Fragment>}
     </div>
   );
 }
 
-export default SignUp;
+const mapStateToProps = ({ errors }) => ({ errors });
+const mapDispatchToProps = dispatch => ({ 
+  signup: user => dispatch(signup(user))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
