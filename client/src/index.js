@@ -6,15 +6,18 @@ import configureStore from './store/store';
 import { Provider } from 'react-redux';
 import { checkLoggedIn } from './util/session';
 
-let preloadedState = {};
-const store = configureStore(preloadedState);
+const renderApp = preloadedState => {
+  const store = configureStore(preloadedState);
+  
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
+}
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+(async () => renderApp(await checkLoggedIn()))();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
