@@ -4,6 +4,7 @@ import './index.css';
 import App from './components/App';
 import configureStore from './store/store';
 import { Provider } from 'react-redux';
+import { checkLoggedIn } from './util/session';
 
 let preloadedState = {};
 const store = configureStore(preloadedState);

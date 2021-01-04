@@ -23,3 +23,15 @@ export const logout = () => (
     method: "DELETE"
   })
 );
+
+export const checkLoggedIn = async preloadedState => {
+  const response = await fetch('/api/session');
+  const { user } = await response.json();
+  preloadedState = {};
+  if (user) {
+    preloadedState = {
+      session: user
+    };
+  }
+  return preloadedState;
+}
