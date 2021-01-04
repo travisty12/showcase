@@ -2,6 +2,7 @@ import './App.css';
 import Header from './Header';
 import Home from "./Home";
 import Portfolio from "./Portfolio";
+import Profile from "./Profile";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import ChatBot from "./ChatBot";
@@ -18,6 +19,7 @@ function App() {
           <Switch>
             <AuthRoute path="/signin" component={SignIn} />
             <AuthRoute path="/signup" component={SignUp} />
+            <ProtectedRoute path="/profile" component={Profile} />
             <Route path="/portfolio">
               <Portfolio />
             </Route>
