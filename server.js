@@ -60,7 +60,7 @@ io.on("connection", socket => {
 
   Chat.find().sort({createdAt: -1}).limit(10).exec((err, chats) => {
     if (err) return console.error(err);
-    socket.emit('load', chats.map(({user, message, createdAt}) => {user, message, createdAt}));
+    socket.emit('load', chats.map(({user, message, createdAt}) => ({user, message, createdAt})));
   });
 
   socket.on("newChat", async (packet) => {

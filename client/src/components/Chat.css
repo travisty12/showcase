@@ -35,3 +35,12 @@
   margin: 0;
   border: 1px solid black;
 }
+
+.Chat {
+  padding: 5px;
+  margin: 5px 0 5px 0;
+}
+
+.Timestamp {
+  font-size: .1em;
+}

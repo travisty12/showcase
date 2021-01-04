@@ -6,7 +6,7 @@ import Profile from "./Profile";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import ChatBot from "./ChatBot";
-import Chat from "./Chat";
+import ChatBox from "./ChatBox";
 import { AuthRoute, ProtectedRoute } from "../util/route";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -31,7 +31,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-        <Chat />
+        <ChatBox />
       </Router>
     </div>
   );

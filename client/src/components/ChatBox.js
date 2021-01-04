@@ -1,13 +1,15 @@
-import "./ChatBox.css";
+import "./Chat.css";
 import {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
+import Chat from './Chat';
 
 const ChatBox = ({socket, session}) => {
-  const [chats, setChats] = useState(false);
+  const [chats, setChats] = useState([]);
   useEffect(() => {
     socket.on("load", (data) => {
+      console.log(data);
       const reversed = data.reverse();
-      setChats(reversed);
+      setChats(reversed,...chats);
       scrollToBottom();
     });
 
@@ -39,10 +41,8 @@ const ChatBox = ({socket, session}) => {
         <button>settings</button>
       </div>
       <div id="ChatBody">
-        {chats ? chats.length > 0 ?
-        chats.map((message, index) => {
-          
-        }) : <p>No messages yet.</p> : <p>Loading...</p>}
+        {chats && chats.length > 0 ?
+        chats.map((chat, index) => <Chat key={index} chat={chat} />) : <p>Loading...</p>}
       </div>
       <form className="NewChatBox" onSubmit={handleSendMessage}>
         <input placeholder="New message..." />
