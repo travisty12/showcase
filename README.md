@@ -60,5 +60,10 @@
 
 * Keywords would have to be translated to ints. Neural network returns a numerical value, it searches the int-keyword hash for a match, returns corresponding keyword. New keywords get a new index in the hash, if a picture is assigned an existing keyword, it will have an expected value of that keyword's index.
 
+### Tools used
+* Mongoose (for MongoDB), Node, Express, BCrypt, Joi
+* React, Redux
+* Session creation and validation with tools learned from [Christian Cashiola](https://itnext.io/mastering-session-authentication-aa29096f6e22)
+
 ### License
 MIT
