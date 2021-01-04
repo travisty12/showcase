@@ -7,21 +7,33 @@ const ChatBox = ({socket, session}) => {
   const [chats, setChats] = useState([]);
   useEffect(() => {
     socket.on("load", (data) => {
-      console.log(data);
       const reversed = data.reverse();
       setChats(reversed,...chats);
       scrollToBottom();
     });
 
-    socket.on("push", ({user, message, createdAt}) => {
-      setChats([...chats,{user, message, createdAt}]);
+    socket.on("push", ({_id, user, message, createdAt}) => {
+      setChats([...chats,{_id, user, message, createdAt}]);
       scrollToBottom();
+    });
+
+    socket.on("reconcile", ({_id, tempId, createdAt}) => {
+      let chatsClone = [...chats];
+      for (let i = 0; i < chatsClone.length; i++) {
+        if (chatsClone[i]._id == tempId) {
+          chatsClone[i] = {...chatsClone[i], _id, createdAt};
+          break;
+        }
+      }
+      setChats([...chatsClone]);
     });
   });
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    socket.emit("newChat",{session, message: e.target[0].value});
+    let tempId = Math.random().toString(36).split(2,12);
+    socket.emit("newChat",{session, message: e.target[0].value, tempId});
+    setChats([...chats,{_id: tempId, user: session.username, message: e.target[0].value}]);
     e.target[0].value = "";
   }
 

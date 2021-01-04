@@ -60,11 +60,11 @@ io.on("connection", socket => {
 
   Chat.find().sort({createdAt: -1}).limit(10).exec((err, chats) => {
     if (err) return console.error(err);
-    socket.emit('load', chats.map(({user, message, createdAt}) => ({user, message, createdAt})));
+    socket.emit('load', chats.map(({_id, user, message, createdAt}) => ({_id, user, message, createdAt})));
   });
 
   socket.on("newChat", async (packet) => {
-    const {session, message} = packet;
+    const {session, message, tempId} = packet;
     if (session.userId) {
       let chatUser = await User.find({_id: session.userId});
       if (!chatUser) return console.error('User not found');
@@ -77,8 +77,9 @@ io.on("connection", socket => {
     chat.save((err) => {
       if (err) return console.error(err);
     });
-    const {createdAt} = chat;
-    socket.broadcast.emit('push', {user , message, createdAt});
+    const {createdAt, _id} = chat;
+    socket.broadcast.emit('push', {_id, user , message, createdAt});
+    socket.emit('reconcile',{tempId, _id, createdAt})
   })
 
   socket.on("disconnect", () => {
