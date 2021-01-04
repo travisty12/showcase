@@ -1,15 +1,15 @@
 import express from "express";
-import Joi from 'joi';
+// import Joi from 'joi';
 import User from '../models/user';
 import { signUp } from '../validations/user';
 import { parseError, sessionizeUser } from '../util/helpers';
 
 const userRoutes = express.Router();
 
-userRoutes.post("", (req, res) => {
+userRoutes.post("", async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    await Joi.validate({ username, email, password }, signUp);
+    await signUp.validate({ username, email, password });
     const newUser = new User({ username, email, password });
     const sessionUser = sessionizeUser(newUser);
     await newUser.save();
@@ -18,7 +18,7 @@ userRoutes.post("", (req, res) => {
     res.send(sessionUser);
 
   } catch (error) {
-    res.status(400).send(parseError(err));
+    res.status(400).send(parseError(error));
   }
 });
 

@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
+import { signup } from '../actions/session';
 
 const SignUp = ({errors, signup}) => {
 

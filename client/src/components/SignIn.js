@@ -11,12 +11,12 @@ const SignIn = ({errors,login}) => {
       email: e.target[0].value,
       password: e.target[1].value
     }
-    let response = await login(user);
+    await login(user);
     if (!user) {
-      setMessage("Error: Username or password invalid.");
+      // setMessage("Error: Username or password invalid.");
     } else {
-      setMessage("Successfully logged in! Routing home...");
-      setTimeout(() => setMessage(<Redirect to="/" />), 1500);
+      // setMessage("Successfully logged in! Routing home...");
+      // setTimeout(() => setMessage(<Redirect to="/" />), 1500);
     }
   }
 
@@ -39,7 +39,7 @@ const SignIn = ({errors,login}) => {
 
 const mapStateToProps = ({errors}) => ({errors});
 const mapDispatchToProps = dispatch => ({
-  login: user => dispatch(login(user));
+  login: user => dispatch(login(user))
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(SignIn);

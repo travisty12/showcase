@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { logout } from '../actions/session';
 
-function HeaderAccountInfo(props) {
+const HeaderAccountInfo = ({logout, session}) => {
   let output;
-  if (props.userSignedIn) {
-    output = <p><Link to="/profile">Profile</Link>  |  <Link to="/signout">Sign Out</Link></p>;
+  if (session.username) {
+    output = <p><Link to="/profile">Profile</Link>  |  <button onClick={logout}>Log Out</button></p>;
   } else {
     output = <p><Link to="/signin">Sign In</Link> | <Link to="/signup">Sign Up</Link></p>;
   }
@@ -15,4 +17,12 @@ function HeaderAccountInfo(props) {
   );
 }
 
-export default HeaderAccountInfo;
+const mapStateToProps = ({session}) => ({
+  session
+});
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout())
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(HeaderAccountInfo);

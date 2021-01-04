@@ -10,8 +10,7 @@ const receiveCurrentUser = user => ({
 });
 
 const logoutCurrentUser = () => ({
-  type: LOGOUT_CURRENT_USER,
-  user
+  type: LOGOUT_CURRENT_USER
 });
 
 export const login = user => async dispatch => {
