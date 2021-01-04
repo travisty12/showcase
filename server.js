@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-import { userRoutes } from './routes/index';
+import { userRoutes, sessionRoutes } from './routes/index';
 import { PORT, SESS_NAME, SESS_SECRET, SESS_LIFETIME } from './config';
 import session from 'express-session';
 import connectStore from 'connect-mongo';
@@ -34,6 +34,7 @@ app.use(session({
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
 apiRouter.use('/users', userRoutes);
+apiRouter.use('/session', sessionRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
