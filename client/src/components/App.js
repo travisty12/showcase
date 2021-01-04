@@ -6,6 +6,7 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import ChatBot from "./ChatBot";
 import Chat from "./Chat";
+import { AuthRoute, ProtectedRoute } from "../util/route";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -15,12 +16,8 @@ function App() {
         <Header />
         <div className="Body">
           <Switch>
-            <Route path="/signin">
-              <SignIn />
-            </Route>
-            <Route path="/signup">
-              <SignUp />
-            </Route>
+            <AuthRoute path="/signin" component={SignIn} />
+            <AuthRoute path="/signup" component={SignUp} />
             <Route path="/portfolio">
               <Portfolio />
             </Route>
