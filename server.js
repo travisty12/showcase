@@ -64,7 +64,7 @@ io.on("connection", socket => {
   });
 
   socket.on("newChat", async (packet) => {
-    const {session, message, tempId} = packet;
+    const {session, message} = packet;
     if (session.userId) {
       let chatUser = await User.find({_id: session.userId});
       if (!chatUser) return console.error('User not found');
@@ -77,9 +77,9 @@ io.on("connection", socket => {
     chat.save((err) => {
       if (err) return console.error(err);
     });
-    const {createdAt, _id} = chat;
-    socket.broadcast.emit('push', {_id, user , message, createdAt});
-    socket.emit('reconcile',{tempId, _id, createdAt})
+    const {_id} = chat;
+    const createdAt = _id.getTimestamp();
+    io.emit('push', {_id, user , message, createdAt});
   })
 
   socket.on("disconnect", () => {
