@@ -49,3 +49,20 @@
 .Timestamp {
   font-size: .1em;
 }
+
+@media only screen and (max-width: 600px) {
+  .ChatBox {
+    width: 90vw;
+  }
+
+  .ChatHeader {
+    height: 10vh;
+  }
+
+  #ChatBody {
+    height: 60vh;
+  }
+  .NewChatBox {
+    height: 10vh;
+  }
+}

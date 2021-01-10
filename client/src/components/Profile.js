@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-const Profile = ({session}) => {
+const Profile = ({session, match: {params: { username }}}) => {
+  console.log(username);
   if (!session.username) {
     console.log('Something went wrong!');
   } else {

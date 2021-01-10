@@ -6,7 +6,7 @@ import { logout } from '../actions/session';
 const HeaderAccountInfo = ({logout, session}) => {
   let output;
   if (session.username) {
-    output = <p><Link to="/profile">Profile</Link>  |  <button onClick={logout}>Log Out</button></p>;
+    output = <p><Link to={`/profile/${session.username}`}>Profile</Link>  |  <button onClick={logout}>Log Out</button></p>;
   } else {
     output = <p><Link to="/signin">Sign In</Link> | <Link to="/signup">Sign Up</Link></p>;
   }

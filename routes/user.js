@@ -1,5 +1,4 @@
 import express from "express";
-// import Joi from 'joi';
 import User from '../models/user';
 import { signUp } from '../validations/user';
 import { parseError, sessionizeUser } from '../util/helpers';

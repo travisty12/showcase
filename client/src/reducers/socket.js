@@ -1,6 +1,6 @@
-import socketIOClient from 'socket.io-client';
+import { socket } from '../util/socket';
 
-export default (state = socketIOClient('/'), {type}) => {
+export default (state = socket, {type}) => {
   switch(type) {
     default: 
       return state;

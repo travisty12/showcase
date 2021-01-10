@@ -19,7 +19,7 @@ function App() {
           <Switch>
             <AuthRoute path="/signin" component={SignIn} />
             <AuthRoute path="/signup" component={SignUp} />
-            <ProtectedRoute path="/profile" component={Profile} />
+            <ProtectedRoute path="/profile/:username" component={Profile} />
             <Route path="/portfolio">
               <Portfolio />
             </Route>
