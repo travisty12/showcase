@@ -1,9 +1,10 @@
 import "./Chat.css";
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import Chat from './Chat';
+import {toggleChat} from '../actions/chat';
 
-const ChatBox = ({socket, session}) => {
+const ChatBox = ({socket, session, chatOpen, toggleChat}) => {
   const [chats, setChats] = useState([]);
   useEffect(() => {
     socket.on("load", (data) => {
@@ -28,31 +29,43 @@ const ChatBox = ({socket, session}) => {
     const chat = document.getElementById('ChatBody');
     chat.scrollTop = chat.scrollHeight;
   }
+
+  const handleToggleChat = () => {
+    toggleChat();
+  }
   
   return (
     <div className="ChatBox">
       <div className="ChatHeader">
         <div>
-          <button>X</button>
-          <button>-</button>
+          <button onClick={handleToggleChat}>X</button>
         </div>
         <p>Chat Box</p>
         <button>settings</button>
       </div>
-      <div id="ChatBody">
-        {chats && chats.length > 0 ?
-        chats.map((chat, index) => <Chat key={index} chat={chat} />) : <p>Loading...</p>}
-      </div>
-      <form className="NewChatBox" onSubmit={handleSendMessage}>
-        <input placeholder="New message..." />
-      </form>
+      { chatOpen ? 
+      <React.Fragment>
+        <div id="ChatBody">
+          {chats && chats.length > 0 ?
+          chats.map((chat, index) => <Chat key={index} chat={chat} />) : <p>Loading...</p>}
+        </div>
+        <form className="NewChatBox" onSubmit={handleSendMessage}>
+          <input placeholder="New message..." />
+        </form>
+      </React.Fragment>
+      : <React.Fragment></React.Fragment>}
     </div>
   );
 }
 
-const mapStateToProps = ({socket, session}) => ({
+const mapStateToProps = ({socket, session, chatOpen}) => ({
   socket,
-  session
+  session,
+  chatOpen
 });
 
-export default connect(mapStateToProps)(ChatBox);
+const mapDispatchToProps = dispatch => ({ 
+  toggleChat: _ => dispatch(toggleChat())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatBox);
